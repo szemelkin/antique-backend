@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const movieSchema = new mongoose.Schema({
+const cardSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
@@ -77,7 +77,7 @@ const movieSchema = new mongoose.Schema({
       message: 'Ссылка не верна',
     },
   },
-  movieId: {
+  cardId: {
     type: Number,
     required: true,
     //   validate: {
@@ -108,4 +108,4 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('movie', movieSchema);
+module.exports = mongoose.model('card', cardSchema);
