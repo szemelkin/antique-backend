@@ -1,14 +1,14 @@
-const Movie = require('../models/movie');
+const Card = require('../models/card');
 const NotFoundError = require('../errors/not-found-err');
 const DefaultError = require('../errors/default-err');
 const ValidationError = require('../errors/validation-err');
 const ForbiddenError = require('../errors/forbidden-err');
 
-const getMovies = (req, res, next) => {
-  Movie.find({})
+const getCards = (req, res, next) => {
+  Card.find({})
     .orFail()
-    .then((movies) => {
-      res.send(movies);
+    .then((cards) => {
+      res.send(cards);
     })
     .catch((err) => {
       let error;
@@ -19,17 +19,17 @@ const getMovies = (req, res, next) => {
     });
 };
 
-function deleteMovieById(req, res, next) {
-  const { movieId } = req.params;
+function deleteCardById(req, res, next) {
+  const { cardId } = req.params;
 
-  Movie.findById(movieId)
+  Card.findById(cardId)
     .orFail()
-    .then((movie) => {
-      if (movie.owner.toString() === req.user._id) {
-        return Movie.findByIdAndRemove(movieId)
+    .then((card) => {
+      if (card.owner.toString() === req.user._id) {
+        return Card.findByIdAndRemove(cardId)
           .orFail()
-          .then((movieWithHash) => {
-            res.send(movieWithHash);
+          .then((cardWithHash) => {
+            res.send(cardWithHash);
           })
           .catch((err) => {
             let error2;
@@ -58,7 +58,7 @@ function deleteMovieById(req, res, next) {
     });
 }
 
-const createMovie = (req, res, next) => {
+const createCard = (req, res, next) => {
   const {
     country,
     director,
@@ -68,11 +68,11 @@ const createMovie = (req, res, next) => {
     image,
     trailer,
     thumbnail,
-    movieId,
+    cardId,
     nameRU,
     nameEN,
   } = req.body;
-  Movie.create({
+  Card.create({
     country,
     director,
     duration,
@@ -81,12 +81,12 @@ const createMovie = (req, res, next) => {
     image,
     trailer,
     thumbnail,
-    movieId,
+    cardId,
     nameRU,
     nameEN,
     owner: req.user._id,
-  }).then((movie) => {
-    res.send(movie);
+  }).then((card) => {
+    res.send(card);
   })
     .catch((err) => {
       let error;
@@ -100,7 +100,7 @@ const createMovie = (req, res, next) => {
 };
 
 module.exports = {
-  getMovies,
-  deleteMovieById,
-  createMovie,
+  getCards,
+  deleteCardById,
+  createCard,
 };

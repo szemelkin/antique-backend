@@ -1,6 +1,6 @@
 const { celebrate, Joi } = require('celebrate');
 const router = require('express').Router();
-const movieRouter = require('./movies');
+const cardRouter = require('./cards');
 const userRouter = require('./users');
 
 const {
@@ -29,6 +29,6 @@ createUser);
 
 router.use('/users', userRouter);
 
-router.use('/movies', movieRouter);
+router.use('/cards', cardRouter);
 
 module.exports = router;

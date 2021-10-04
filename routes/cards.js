@@ -5,14 +5,14 @@ const router = require('express').Router();
 const auth = require('../middlewares/auth');
 
 const {
-  getMovies,
-  deleteMovieById,
-  createMovie,
-} = require('../controllers/movies');
+  getCards,
+  deleteCardById,
+  createCard,
+} = require('../controllers/cards');
 
 router.use(auth);
 
-router.get('/', getMovies);
+router.get('/', getCards);
 
 router.post('/',
   celebrate({
@@ -25,19 +25,19 @@ router.post('/',
       image: Joi.string(),
       trailer: Joi.string(),
       thumbnail: Joi.string(),
-      movieId: Joi.number(),
+      cardId: Joi.number(),
       nameRU: Joi.string(),
       nameEN: Joi.string(),
     }),
   }),
-  createMovie);
+  createCard);
 
-router.delete('/:movieId',
+router.delete('/:cardId',
   celebrate({
     params: Joi.object().keys({
-      movieId: Joi.string().hex().length(24),
+      cardId: Joi.string().hex().length(24),
     }),
   }),
-  deleteMovieById);
+  deleteCardById);
 
 module.exports = router;
