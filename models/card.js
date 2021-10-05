@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const cardSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 2,
     maxlength: 150,
   },
   director: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 2,
     maxlength: 150,
   },
   duration: {
     type: Number,
-    required: true,
+    // required: true,
     //   validate: {
     //     validator: function(v) {
     //         return /d{10}/.test(v);
@@ -27,7 +27,7 @@ const cardSchema = new mongoose.Schema({
   },
   year: {
     type: Number,
-    required: true,
+    // required: true,
     // validate: {
     //   validator: function(v) {
     //       return /d{4}/.test(v);
@@ -40,13 +40,13 @@ const cardSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 2,
     maxlength: 5000,
   },
   image: {
     type: String,
-    required: true,
+    // required: true,
     validate: {
       validator(v) {
         const regexp = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/g;
@@ -57,7 +57,7 @@ const cardSchema = new mongoose.Schema({
   },
   trailer: {
     type: String,
-    required: true,
+    // required: false,
     validate: {
       validator(v) {
         const regexp = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/g;
@@ -68,7 +68,7 @@ const cardSchema = new mongoose.Schema({
   },
   thumbnail: {
     type: String,
-    required: true,
+    // required: false,
     validate: {
       validator(v) {
         const regexp = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/g;
@@ -79,7 +79,7 @@ const cardSchema = new mongoose.Schema({
   },
   cardId: {
     type: Number,
-    required: true,
+    // required: true,
     //   validate: {
     //     validator: function(v) {
     //         return /d{10}/.test(v);
@@ -91,20 +91,20 @@ const cardSchema = new mongoose.Schema({
   },
   nameRU: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 2,
     maxlength: 100,
   },
   nameEN: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 2,
     maxlength: 100,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: true,
+    // required: true,
   },
 });
 
