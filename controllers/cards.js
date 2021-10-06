@@ -60,30 +60,24 @@ function deleteCardById(req, res, next) {
 
 const createCard = (req, res, next) => {
   const {
-    country,
-    director,
-    duration,
-    year,
+    nameRU,
     description,
     image,
-    trailer,
-    thumbnail,
-    cardId,
-    nameRU,
-    nameEN,
+    investPrice,
+    sellPrice,
+    investorId,
+    status,
+    lotId,
   } = req.body;
   Card.create({
-    country,
-    director,
-    duration,
-    year,
+    nameRU,
     description,
     image,
-    trailer,
-    thumbnail,
-    cardId,
-    nameRU,
-    nameEN,
+    investPrice,
+    sellPrice,
+    investorId,
+    status,
+    lotId,
     owner: req.user._id,
   }).then((card) => {
     res.send(card);
