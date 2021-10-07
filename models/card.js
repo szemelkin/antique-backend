@@ -49,7 +49,9 @@ const cardSchema = new mongoose.Schema({
     maxlength: 10,
   },
   investorId: {
-    type: Number,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    // type: Number,
     // required: true,
     //   validate: {
     //     validator: function(v) {
@@ -57,8 +59,8 @@ const cardSchema = new mongoose.Schema({
     //     },
     //     message: '{VALUE} is not a valid 10 digit number!'
     // },
-    minlength: 2,
-    maxlength: 10,
+    // minlength: 2,
+    // maxlength: 10,
   },
   status: {
     type: String,
