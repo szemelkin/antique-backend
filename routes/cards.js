@@ -8,6 +8,7 @@ const {
   getCards,
   deleteCardById,
   createCard,
+  renewLotStatus,
 } = require('../controllers/cards');
 
 router.use(auth);
@@ -36,5 +37,14 @@ router.delete('/:cardId',
     }),
   }),
   deleteCardById);
+
+router.patch('/renewStatus/:cardId',
+  celebrate({
+    body: Joi.object().keys({
+      investorId: Joi.number(),
+      status: Joi.string(),
+    }),
+  }),
+  renewLotStatus);
 
 module.exports = router;

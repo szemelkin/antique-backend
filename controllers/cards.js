@@ -93,8 +93,39 @@ const createCard = (req, res, next) => {
     });
 };
 
+const renewLotStatus = (req, res, next) => {
+  const { investorId, status } = req.body;
+  const { cardId } = req.params;
+
+  Card.findByIdAndUpdate(
+    cardId,
+    { investorId, status },
+    {
+      new: false,
+      runValidators: true,
+      upsert: true,
+    },
+  )
+    .orFail()
+    .then((card) => {
+      res.send(card);
+    })
+    .catch((err) => {
+      let error;
+      if (err.name === 'ValidationError') {
+        error = new ValidationError('Переданы некорректные данные при создании пользователя');
+      } else if (err.name === 'DocumentNotFoundError') {
+        error = new NotFoundError('Пользователь по указанному _id не найден.');
+      } else {
+        error = new DefaultError('Ошибка по умолчанию');
+      }
+      next(error);
+    });
+};
+
 module.exports = {
   getCards,
   deleteCardById,
   createCard,
+  renewLotStatus,
 };
