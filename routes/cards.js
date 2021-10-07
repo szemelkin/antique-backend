@@ -41,7 +41,7 @@ router.delete('/:cardId',
 router.patch('/renewStatus/:cardId',
   celebrate({
     body: Joi.object().keys({
-      investorId: Joi.number(),
+      investorId: Joi.string().hex().length(24),
       status: Joi.string(),
     }),
   }),
