@@ -8,6 +8,7 @@ const getCards = (req, res, next) => {
   Card.find({})
     .orFail()
     .then((cards) => {
+      res.setHeader('Access-Control-Allow-Origin : *');
       res.send(cards);
     })
     .catch((err) => {
