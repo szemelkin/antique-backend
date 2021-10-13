@@ -19,9 +19,16 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
   // upsert: true,
 });
 
+const corsOptions = {
+  origin: '*',
+};
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -32,12 +39,12 @@ app.use(limiter);
 
 // app.use(cors(CorsOptions.AllowAll));
 
-app.use(cors(), (req, res, next) => {
-  res.append('Access-Control-Allow-Origin', '*');
-  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.append('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// app.use(cors(), (req, res, next) => {
+//   res.append('Access-Control-Allow-Origin', '*');
+//   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   res.append('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
 
 // config.EnableCors(new EnableCorsAttribute(Properties.Settings.Default.Cors, "", ""));
 // app.UseCors(CorsOptions.AllowAll);
