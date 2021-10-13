@@ -32,8 +32,8 @@ app.use(limiter);
 
 // app.use(cors(CorsOptions.AllowAll));
 
-app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin', '*');
+app.use(cors(), (req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.append('Access-Control-Allow-Headers', 'Content-Type');
   next();
