@@ -32,8 +32,13 @@ app.use(cors(corsOptions));
 // app.options('*', cors(corsOptions));
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: 20 * 60 * 1000,
   max: 100,
+  statusCode: 200,
+  message: {
+    status: 429,
+    error: 'You are doing that too much. Please try again in 10 minutes.',
+  },
 });
 
 app.use(limiter);
