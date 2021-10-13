@@ -21,13 +21,14 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
 
 const corsOptions = {
   origin: '*',
+  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
 };
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 // app.options('*', cors(corsOptions));
 
 const limiter = rateLimit({
