@@ -58,6 +58,27 @@ function deleteCardById(req, res, next) {
     });
 }
 
+function getLotById(req, res, next) {
+  const { cardId } = req.params;
+
+  Card.findById(cardId)
+    .orFail()
+    .then((card) => {
+      res.send(card);
+    })
+    .catch((err) => {
+      let error;
+      if (err.name === 'CastError') {
+        error = new ValidationError('Не валидный _id');
+      } else if (err.name === 'DocumentNotFoundError') {
+        error = new NotFoundError('Карточка не найдена');
+      } else {
+        error = new DefaultError('Ошибка по умолчанию');
+      }
+      next(error);
+    });
+}
+
 const createCard = (req, res, next) => {
   const {
     nameRU,
@@ -65,6 +86,7 @@ const createCard = (req, res, next) => {
     image,
     investPrice,
     sellPrice,
+    revenueFromLot,
     investorId,
     status,
     lotId,
@@ -75,6 +97,7 @@ const createCard = (req, res, next) => {
     image,
     investPrice,
     sellPrice,
+    revenueFromLot,
     investorId,
     status,
     lotId,
@@ -128,4 +151,5 @@ module.exports = {
   deleteCardById,
   createCard,
   renewLotStatus,
+  getLotById,
 };

@@ -9,6 +9,7 @@ const {
   deleteCardById,
   createCard,
   renewLotStatus,
+  getLotById,
 } = require('../controllers/cards');
 
 router.use(auth);
@@ -23,6 +24,7 @@ router.post('/',
       image: Joi.array().items(Joi.string()),
       investPrice: Joi.number(),
       sellPrice: Joi.number(),
+      revenueFromLot: Joi.number(),
       investorId: Joi.number(),
       status: Joi.string(),
       lotId: Joi.number(),
@@ -37,6 +39,14 @@ router.delete('/:cardId',
     }),
   }),
   deleteCardById);
+
+router.get('/cards/:cardId',
+  celebrate({
+    params: Joi.object().keys({
+      cardId: Joi.string().hex().length(24),
+    }),
+  }),
+  getLotById);
 
 router.patch('/renewStatus/:cardId',
   celebrate({

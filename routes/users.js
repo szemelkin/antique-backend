@@ -28,6 +28,7 @@ router.patch('/me',
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       email: Joi.string().min(2).max(30),
+      userStatus: Joi.string().min(2).max(30),
     }),
   }),
   renewUser);
