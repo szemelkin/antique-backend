@@ -5,7 +5,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     // required: true,
     minlength: 2,
-    maxlength: 200,
+    maxlength: 2000,
   },
   description: {
     type: String,
@@ -33,7 +33,7 @@ const cardSchema = new mongoose.Schema({
     //     },
     //     message: '{VALUE} is not a valid 10 digit number!'
     // },
-    minlength: 2,
+    minlength: 1,
     maxlength: 10,
   },
   sellPrice: {
@@ -45,7 +45,7 @@ const cardSchema = new mongoose.Schema({
     //     },
     //     message: '{VALUE} is not a valid 10 digit number!'
     // },
-    minlength: 2,
+    minlength: 1,
     maxlength: 10,
   },
   revenueFromLot: {
@@ -57,7 +57,7 @@ const cardSchema = new mongoose.Schema({
     //     },
     //     message: '{VALUE} is not a valid 10 digit number!'
     // },
-    minlength: 2,
+    minlength: 1,
     maxlength: 10,
   },
   investorId: {
