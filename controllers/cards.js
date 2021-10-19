@@ -146,10 +146,60 @@ const renewLotStatus = (req, res, next) => {
     });
 };
 
+// Админка: Сохраняем все изменеия в карточке
+const renewAllDataOfLot = (req, res, next) => {
+  const {
+    nameRU,
+    description,
+    investPrice,
+    sellPrice,
+    revenueFromLot,
+    // investorId,
+    status,
+    lotId,
+  } = req.body;
+  const { cardId } = req.params;
+
+  Card.findByIdAndUpdate(
+    cardId,
+    {
+      nameRU,
+      description,
+      investPrice,
+      sellPrice,
+      revenueFromLot,
+      // investorId,
+      status,
+      lotId,
+    },
+    {
+      new: false,
+      runValidators: true,
+      upsert: true,
+    },
+  )
+    .orFail()
+    .then((card) => {
+      res.send(card);
+    })
+    .catch((err) => {
+      let error;
+      if (err.name === 'ValidationError') {
+        error = new ValidationError('Переданы некорректные данные при создании пользователя');
+      } else if (err.name === 'DocumentNotFoundError') {
+        error = new NotFoundError('Пользователь по указанному _id не найден.');
+      } else {
+        error = new DefaultError('Ошибка по умолчанию');
+      }
+      next(error);
+    });
+};
+
 module.exports = {
   getCards,
   deleteCardById,
   createCard,
   renewLotStatus,
   getLotById,
+  renewAllDataOfLot,
 };

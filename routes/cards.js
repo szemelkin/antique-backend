@@ -10,6 +10,7 @@ const {
   createCard,
   renewLotStatus,
   getLotById,
+  renewAllDataOfLot,
 } = require('../controllers/cards');
 
 router.use(auth);
@@ -56,5 +57,21 @@ router.patch('/renewStatus/:cardId',
     }),
   }),
   renewLotStatus);
+
+// Админка: Сохраняем все изменеия в карточке
+router.patch('/renewAllData/:cardId',
+  celebrate({
+    body: Joi.object().keys({
+      nameRU: Joi.string(),
+      description: Joi.string(),
+      investPrice: Joi.number(),
+      sellPrice: Joi.number(),
+      revenueFromLot: Joi.number(),
+      // investorId: Joi.number(),
+      status: Joi.string(),
+      lotId: Joi.number(),
+    }),
+  }),
+  renewAllDataOfLot);
 
 module.exports = router;
