@@ -71,13 +71,13 @@ const cardSchema = new mongoose.Schema({
     //     },
     //     message: '{VALUE} is not a valid 10 digit number!'
     // },
-    // minlength: 2,
+    // minlength: 0,
     // maxlength: 10,
   },
   status: {
     type: String,
     // required: true,
-    minlength: 2,
+    minlength: 0,
     maxlength: 50,
   },
   lotId: {
